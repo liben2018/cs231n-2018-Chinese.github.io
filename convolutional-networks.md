@@ -4,6 +4,7 @@ permalink: /convolutional-networks/
 ---
 
 Table of Contents:
+目录：
 
 - [Architecture Overview](#overview)
 - [ConvNet Layers](#layers)
@@ -13,6 +14,20 @@ Table of Contents:
   - [Fully-Connected Layer](#fc)
   - [Converting Fully-Connected Layers to Convolutional Layers](#convert)
 - [ConvNet Architectures](#architectures)
+  - [Layer Patterns](#layerpat)
+  - [Layer Sizing Patterns](#layersizepat)
+  - [Case Studies](#case) (LeNet / AlexNet / ZFNet / GoogLeNet / VGGNet)
+  - [Computational Considerations](#comp)
+- [Additional References](#add)
+
+- [架构综述](#overview)
+- [卷积网络中的层](#layers)
+  - [卷积层](#conv)
+  - [池化层](#pool)
+  - [归一化层](#norm)
+  - [全联接层](#fc)
+  - [转换全联接层到卷积层](#convert)
+- [卷积网络架构](#architectures)
   - [Layer Patterns](#layerpat)
   - [Layer Sizing Patterns](#layersizepat)
   - [Case Studies](#case) (LeNet / AlexNet / ZFNet / GoogLeNet / VGGNet)
