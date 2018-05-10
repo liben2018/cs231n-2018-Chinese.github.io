@@ -39,15 +39,21 @@ Table of Contents:
 
 Convolutional Neural Networks are very similar to ordinary Neural Networks from the previous chapter: they are made up of neurons that have learnable weights and biases. Each neuron receives some inputs, performs a dot product and optionally follows it with a non-linearity. The whole network still expresses a single differentiable score function: from the raw image pixels on one end to class scores at the other. And they still have a loss function (e.g. SVM/Softmax) on the last (fully-connected) layer and all the tips/tricks we developed for learning regular Neural Networks still apply.
 
-卷积神经网络非常类似于前面章节中的通常的神经网络：它们由神经元构成，并且这些神经元拥有可以学习的权重和偏置。每个神经元收到一些输入，执行一个点积操作
+卷积神经网络非常类似于前面章节中的通常的神经网络：它们由神经元构成，并且这些神经元拥有可以学习的权重和偏置。每个神经元收到一些输入，执行一个点积操作，并且选择性的添加（追随？）一个非线性（项）。整个网络依旧表示一个单个可微的分数函数：从一端的一个未经处理的（生？）图像像素到另一端的分类分数。并且，它们在最后（全联接）一层依然拥有一个损耗函数（例如，SVM/Softmax），并且所有的我们开发的关于学习通常的神经网络的 提示/技巧 依然适用。
 
 So what does change? ConvNet architectures make the explicit assumption that the inputs are images, which allows us to encode certain properties into the architecture. These then make the forward function more efficient to implement and vastly reduce the amount of parameters in the network.
+
+那么究竟改变了什么呢？卷积网络架构做了清楚的假设，也就是输入是图像，该假设允许我们特化（编码？）确定的性质到卷积网络架构。然后，这些假定使得前向传播函数更加有效的去执行，同时，极大的降低了网络中的参数数量。
 
 <a name='overview'></a>
 
 ### Architecture Overview
+### 架构综述
 
 *Recall: Regular Neural Nets.* As we saw in the previous chapter, Neural Networks receive an input (a single vector), and transform it through a series of *hidden layers*. Each hidden layer is made up of a set of neurons, where each neuron is fully connected to all neurons in the previous layer, and where neurons in a single layer function completely independently and do not share any connections. The last fully-connected layer is called the "output layer" and in classification settings it represents the class scores.
+
+*召回：通常的神经网络*      
+就像我们在前面章节中看到的，神经网络收到一个输入（一个单个矢量），并且通过一系列*隐藏层*转换它。
 
 *Regular Neural Nets don't scale well to full images*. In CIFAR-10, images are only of size 32x32x3 (32 wide, 32 high, 3 color channels), so a single fully-connected neuron in a first hidden layer of a regular Neural Network would have 32\*32\*3 = 3072 weights. This amount still seems manageable, but clearly this fully-connected structure does not scale to larger images. For example, an image of more respectable size, e.g. 200x200x3, would lead to neurons that have 200\*200\*3 = 120,000 weights. Moreover, we would almost certainly want to have several such neurons, so the parameters would add up quickly! Clearly, this full connectivity is wasteful and the huge number of parameters would quickly lead to overfitting.
 
